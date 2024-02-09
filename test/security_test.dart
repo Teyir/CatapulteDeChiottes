@@ -5,8 +5,6 @@ import 'utils/door_spy_test.dart';
 import 'utils/fake_reader_test.dart';
 
 void main() {
-  //This test check if the test framework is working
-  test('TestReady', () => expect(true, true));
 
   //This test emulate a simple use case with a fake reader and a door spy.
   //We are checking if the door is opened when the badge is detected.

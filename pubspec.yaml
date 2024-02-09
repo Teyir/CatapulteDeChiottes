@@ -3,7 +3,7 @@ description: Projet CDC EPSI I1
 version: 1.0.0
 
 environment:
-  sdk: ^3.2.3
+  sdk: '>=3.0.0'
 
 dependencies:
   # path: ^1.8.0
