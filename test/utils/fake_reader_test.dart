@@ -1,5 +1,6 @@
 import 'package:cdc/interfaces/door_interface.dart';
 import 'package:cdc/interfaces/reader_interface.dart';
+import 'package:cdc/models/badge_model.dart';
 
 class FakeReader implements IReader {
   late final List<IDoor> _doors;
@@ -7,8 +8,8 @@ class FakeReader implements IReader {
 
   FakeReader(this._doors);
 
-  void emulateBadgeDetection() {
-    _isBadgeDetected = true;
+  void emulateBadgeDetection(Badge badge) {
+    _isBadgeDetected = !badge.isRestricted;
   }
 
   @override
