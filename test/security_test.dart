@@ -1,4 +1,5 @@
 import 'package:cdc/managers/engine_manager.dart';
+import 'package:cdc/models/badge_model.dart';
 import 'package:test/test.dart';
 
 import 'utils/door_spy_test.dart';
@@ -11,12 +12,27 @@ void main() {
   test('BasicCheck', () {
     final DoorSpy doorSpy = DoorSpy();
     final FakeReader fakeReader = FakeReader([doorSpy]);
+    final Badge badge = Badge(isRestricted: false);
 
-    fakeReader.emulateBadgeDetection();
+    fakeReader.emulateBadgeDetection(badge);
 
     EngineManager.callReaders([fakeReader]);
 
     expect(doorSpy.isOpenRequested(), true);
+  });
+
+  //This test emulate a simple use case with a fake reader and a door spy.
+  //We are checking if the door is not opened when the badge is restricted..
+  test('BasicCheckWithRestrictedBadge', () {
+    final DoorSpy doorSpy = DoorSpy();
+    final FakeReader fakeReader = FakeReader([doorSpy]);
+    final Badge badge = Badge(isRestricted: true);
+
+    fakeReader.emulateBadgeDetection(badge);
+
+    EngineManager.callReaders([fakeReader]);
+
+    expect(doorSpy.isOpenRequested(), false);
   });
 
   // This test emulate a simple use case with a fake reader and a door spy.
@@ -35,8 +51,9 @@ void main() {
   test('BasicCheckWithoutEmulatingBadgeDetection', () {
     final DoorSpy doorSpy = DoorSpy();
     final FakeReader fakeReader = FakeReader([doorSpy]);
+    final Badge badge = Badge(isRestricted: false);
 
-    fakeReader.emulateBadgeDetection();
+    fakeReader.emulateBadgeDetection(badge);
 
     expect(doorSpy.isOpenRequested(), false);
   });
@@ -47,8 +64,9 @@ void main() {
     final DoorSpy doorSpy1 = DoorSpy();
     final DoorSpy doorSpy2 = DoorSpy();
     final FakeReader fakeReader = FakeReader([doorSpy1, doorSpy2]);
+    final Badge badge = Badge(isRestricted: false);
 
-    fakeReader.emulateBadgeDetection();
+    fakeReader.emulateBadgeDetection(badge);
 
     EngineManager.callReaders([fakeReader]);
 
@@ -62,8 +80,9 @@ void main() {
     final DoorSpy doorSpy = DoorSpy();
     final FakeReader fakeReader1 = FakeReader([doorSpy]);
     final FakeReader fakeReader2 = FakeReader([doorSpy]);
+    final Badge badge = Badge(isRestricted: false);
 
-    fakeReader2.emulateBadgeDetection();
+    fakeReader2.emulateBadgeDetection(badge);
 
     EngineManager.callReaders([fakeReader1, fakeReader2]);
 
@@ -77,8 +96,9 @@ void main() {
     final DoorSpy doorSpy2 = DoorSpy();
     final FakeReader fakeReader1 = FakeReader([doorSpy1]);
     final FakeReader fakeReader2 = FakeReader([doorSpy2]);
+    final Badge badge = Badge(isRestricted: false);
 
-    fakeReader2.emulateBadgeDetection();
+    fakeReader2.emulateBadgeDetection(badge);
 
     EngineManager.callReaders([fakeReader1, fakeReader2]);
 
