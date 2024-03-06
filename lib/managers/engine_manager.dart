@@ -7,7 +7,9 @@ class EngineManager extends IEngine {
     for (final IReader reader in readers) {
       if (reader.isBadgeDetected()) {
         for (final IDoor door in reader.doors()) {
-          door.open();
+          if (door.isOpenToday) {
+            door.open();
+          }
         }
       }
     }

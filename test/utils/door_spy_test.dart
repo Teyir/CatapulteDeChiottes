@@ -9,14 +9,16 @@ class DoorSpy implements IDoor {
   @override
   int endHour;
 
+  @override
+  bool isOpenToday;
+
   DoorSpy({
     required this.beginHour,
     required this.endHour,
+    this.isOpenToday = true,
   });
 
-  bool isOpenRequested() {
-    return _isOpenRequested;
-  }
+  bool get isOpenRequested => _isOpenRequested;
 
   @override
   void open() {
